@@ -36,7 +36,6 @@ module HasDynamicStatusTypes
           end
           old = status_type.current_status_code
           unless old == new_status_code # do we need to change the code?
-            #status_type.current_status_code = new_status_code
             status_type.update_attributes(current_status_code: new_status_code)
           end
           ::DynamicStatus.new(self, attr, new_status_code)
