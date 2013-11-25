@@ -4,9 +4,9 @@ class DynamicStatus
   def initialize(model, type, code)
     @model, @type, @code = model, type, code
 
-    # instanciat object that knows how to build the correct
+    # instanciate object that knows how to build the correct
     # lookup table for this status type
-    klass = model.class.name + type.to_s.classify 
+    klass = model.class.name + type.to_s.classify
     begin
       lookup_class = Lookup.const_get(klass)
     rescue NameError => e
