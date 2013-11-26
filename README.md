@@ -48,5 +48,23 @@ need to write a class to do so.
 
 You can now ask the status type for its description
 
-    puts "SStatus: #{model.sales_status.description}"  # SStatus: sold
+    puts "Location: #{model.location_status.description}"  # Location: On the shop floor
+
+## Migration
+
+The status types are stored in the database against a polymorphic association named
+:status_types, to ensure this works you need to do the following migration:
+
+    def change
+      create_table :status_types do |t|
+        t.integer :status_typeable_id, null: false
+        t.string  :status_typeable_type, null: false
+        t.string  :status_type, null: false
+        t.string  :current_status_code
+        t.string  :previous_statuses_codes
+        t.timestamps
+      end
+      add_index :status_types, [:status_typeable_id, :status_typeable_type, :status_type], unique: true, name: 'index_status_types_on_status_typeable'
+    end
+
 
