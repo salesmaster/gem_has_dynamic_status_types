@@ -29,16 +29,4 @@ class DynamicStatus::Lookup
     raise NotImplementedError
   end
 
-  # You can write a real lookup class like so:
-  class VehicleFleet < DynamicStatus::Lookup
-    def lookup_table
-      # some logic goes here to determin how to get the
-      # code/name lookup
-      {
-        'abc' => 'Alpha Bravo Charlie',
-        'cba' => 'Charlie Bravo Alpha'
-      }
-    end
-  end
-
 end
