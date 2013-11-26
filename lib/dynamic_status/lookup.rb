@@ -1,6 +1,15 @@
+=begin
+
+Base class to be used by DynamicStatus to lookup descriptions from codes
+using a passed in model as a reference.
+(original idea is to be able to use different status codes for different vehicles)
+
+=end
+
 class DynamicStatus::Lookup
 
   attr_reader :model
+
   attr_accessor :table
 
   def initialize(model)

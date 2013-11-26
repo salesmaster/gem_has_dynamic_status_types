@@ -1,6 +1,7 @@
 
 require "minitest/autorun"
 require "has_dynamic_status_types"
+require "timecop"
 
 # -- below we setup my test AR structure
 
