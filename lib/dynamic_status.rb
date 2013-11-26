@@ -10,15 +10,12 @@ the code is.
 require 'delegate'
 
 class DynamicStatus < SimpleDelegator
-  attr_accessor :model, :type, :code, :looker_upper
+  attr_accessor :model, :type, :code
   def initialize(status_code, model, status_type)
     super(status_code) # delegate to the code.
 
     @code, @model, @type = status_code, model, status_type
 
-    # instanciat object that knows how to build the correct
-    # lookup table for this status type
-    @looker_upper = lookup_class.new(model)
   end
 
   def description
@@ -26,6 +23,12 @@ class DynamicStatus < SimpleDelegator
   end
 
   private
+
+  def looker_upper
+    # instanciat object that knows how to build the correct
+    # lookup table for this status type
+    @looker_upper ||= lookup_class.new(model)
+  end
 
   def lookup_class
     klass = model.class.name + type.to_s.classify 
