@@ -23,7 +23,7 @@ module HasDynamicStatusTypes
         hist_method_name = "hist_#{base_method_name}".to_sym
 
         define_method find_method_name do
-          status_type = status_types.find { |st| st.status_type == attr }
+          status_type = status_types.find { |st| st.status_type.to_s == attr.to_s }
         end
 
         define_method base_method_name do
