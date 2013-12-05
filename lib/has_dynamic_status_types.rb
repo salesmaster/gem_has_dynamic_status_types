@@ -21,6 +21,7 @@ module HasDynamicStatusTypes
         base_method_name = "#{attr}_status".to_sym
         find_method_name = "fetch_#{base_method_name}".to_sym
         hist_method_name = "hist_#{base_method_name}".to_sym
+        desc_method_name = "#{base_method_name}_description".to_sym
 
         define_method find_method_name do
           status_type = status_types.find { |st| st.status_type.to_s == attr.to_s }
@@ -50,6 +51,12 @@ module HasDynamicStatusTypes
           status_type.history.map do |old|
             ::DynamicStatus.new(old[:code], self, attr)
           end
+        end
+
+        define_method desc_method_name do
+          status_type = send(find_method_name)
+          return unless status_type
+          ::DynamicStatus.new(status_type.current_status_code, self, attr).description
         end
 
       end
