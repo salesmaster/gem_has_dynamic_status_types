@@ -14,7 +14,7 @@ module HasDynamicStatusTypes
 
       attrs = [args].flatten
 
-      has_many :status_types, as: 'status_typeable', class_name: HasDynamicStatusTypes::Association, autosave: true
+      has_many :status_types, as: 'status_typeable', class_name: HasDynamicStatusTypes::Association, autosave: true, dependent: :destroy 
 
       attrs.each do |attr|
 

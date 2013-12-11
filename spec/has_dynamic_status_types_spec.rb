@@ -25,8 +25,8 @@ describe HasDynamicStatusTypes do
       (pen.location_status = 'in_draw').must_equal 'in_draw'
       (pen.ink_status = 'dry').must_equal 'dry'
 
-      pen.location_status.to_s.must_equal 'in_draw'
-      pen.ink_status.to_s.must_equal 'dry'
+      pen.location_status.must_equal 'in_draw'
+      pen.ink_status.must_equal 'dry'
     end
 
     it "defines a method to get a history of a state" do
@@ -46,7 +46,7 @@ describe HasDynamicStatusTypes do
       pen.save
 
       pen.hist_location_status.must_be_kind_of(Array)
-      pen.hist_location_status.map(&:to_s).must_equal(["in_draw","in_hand","behind_ear"])
+      pen.hist_location_status.must_equal(["in_draw","in_hand","behind_ear"])
     end
 
     it "allows a user to get a the description of a code" do
@@ -58,9 +58,22 @@ describe HasDynamicStatusTypes do
     it "can be updated via update_attributes" do
       pen = Pen.create(type: 'Felt Tip', colour: 'red')
       pen.update_attributes(location_status: 'in_pants', ink_status: 'empty')
-      pen.location_status.to_s.must_equal 'in_pants'
-      pen.ink_status.to_s.must_equal 'empty'
+      pen.location_status.must_equal 'in_pants'
+      pen.ink_status.must_equal 'empty'
       pen.ink_status.description.must_equal 'No ink remains'
+    end
+
+    it "can destorys the status with the model" do
+      pen = Pen.create(type: 'Felt Tip', colour: 'red', location_status: 'in_pants')
+      id = pen.id
+      pen.destroy
+
+      pen2 = Pen.new(type: 'Felt Tip', colour: 'red')
+      pen2.id = id
+      pen2.save!
+
+      pen2 = Pen.find id
+      pen2.location_status.wont_equal 'in_pants'
     end
 
   end
