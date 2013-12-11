@@ -55,5 +55,13 @@ describe HasDynamicStatusTypes do
       pen.ink_status.description.must_equal 'No ink remains'
     end
 
+    it "can be updated via update_attributes" do
+      pen = Pen.create(type: 'Felt Tip', colour: 'red')
+      pen.update_attributes(location_status: 'in_pants', ink_status: 'empty')
+      pen.location_status.to_s.must_equal 'in_pants'
+      pen.ink_status.to_s.must_equal 'empty'
+      pen.ink_status.description.must_equal 'No ink remains'
+    end
+
   end
 end
