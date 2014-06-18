@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "timecop"
 
-  spec.add_dependency 'activerecord', '~> 3.2.14'
+  spec.add_dependency("activerecord", ">=3.2.1", "<5.0")
   spec.add_dependency 'sqlite3'
 end
