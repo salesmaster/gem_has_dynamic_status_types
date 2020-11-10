@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Benjamin Martin']
   spec.email         = ['benjamin@salemaster.co.uk']
   spec.description   = %q{Add different statuses to your models}
-  spec.summary       = %q{Models can has different statuses, but different flavours of the same model the same status might mean something else .. crazy!}
+  spec.summary       = %q{Models can have different statuses, but different flavours of the same model the same status might mean something else .. crazy!}
   spec.homepage      = 'http://www.salesmaster.co.uk'
   spec.license       = 'MIT'
 
@@ -18,5 +18,5 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activerecord', '>=3.2.1', '<5.0'
+  spec.add_dependency 'activerecord', '< 6.0'
 end

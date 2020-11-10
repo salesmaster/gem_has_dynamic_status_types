@@ -4,7 +4,6 @@ ruby '2.5.8'
 gemspec
 
 group :test do
-  gem 'bundler', '~> 1.3'
   gem 'rake'
   gem 'sqlite3'
   gem 'timecop'
