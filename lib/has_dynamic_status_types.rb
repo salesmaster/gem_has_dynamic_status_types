@@ -7,14 +7,14 @@ require "dynamic_status/lookup"
 module HasDynamicStatusTypes
 
   # monkey-patch ActiveRecord::Base
-  #  - defines the status_types polymorphic assocaition in which to store the status type and code
+  #  - defines the status_types polymorphic association in which to store the status type and code
   #  - creates instance methods on the class to interact with the defined status types
   ::ActiveRecord::Base.class_eval do
     def self.has_dynamic_status_types( *args )
 
       attrs = [args].flatten
 
-      has_many :status_types, as: 'status_typeable', class_name: HasDynamicStatusTypes::Association, autosave: true, dependent: :destroy 
+      has_many :status_types, as: 'status_typeable', class_name: 'HasDynamicStatusTypes::Association', autosave: true, dependent: :destroy
 
       attrs.each do |attr|
 
